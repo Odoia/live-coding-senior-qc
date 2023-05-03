@@ -56,9 +56,9 @@ end
 # Que problemas você, enxerga no controller abaixo?
 class CommentsController < ApplicationController
   def users_comments(params)
-    posts = Post.all
-    comments = posts.map(&:comments).flatten
-    @user_comments = comments.select do |comment|
+    posts ||= Post.all
+    comments ||= posts.map(&:comments).flatten
+    comments.select do |comment|
       comment.author.username == params[:username]
     end
   end
